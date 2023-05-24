@@ -1,0 +1,35 @@
+.list-item{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: .5rem;
+    padding: .25rem 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+    border-radius: .5rem;
+    font-size: 1.2rem;
+}
+.title{
+    color: black;
+    font-weight: bold;
+}
+.btn{
+    font-size: 1.2rem;
+    margin-left: .8rem;
+    cursor: pointer;
+    color: black;
+    border: 0;
+    border-radius: 1rem;
+    padding: .5rem .75rem;
+}
+.del{
+    background-color: darksalmon;
+}
+.edit{
+    background-color: darkgrey;
+}
+.dark .title{
+    color: white;
+}
+.dark .list-item{
+    box-shadow: 0 1px .3rem rgba(150, 181, 250, 0.4);
+}
