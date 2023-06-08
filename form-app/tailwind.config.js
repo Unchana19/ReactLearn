@@ -4,6 +4,8 @@ export default {
     "./index.html",
     "./src/App.jsx",
     "./src/main.jsx",
+    "./src/components/Form.jsx",
+    "./src/components/ItemForm.jsx",
   ],
   theme: {
     extend: {},
