@@ -1,10 +1,11 @@
 import './App.css'
+import Form from './components/Form'
 
 function App() {
 
   return (
-    <div>
-      <h2>Hello World</h2>
+    <div className='bg-gray-900 h-screen items-center justify-center flex'>
+      <Form />
     </div>
   )
 }
