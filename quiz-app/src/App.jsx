@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react'
-import './App.css'
 import Menu from './components/Menu';
 import Quiz from './components/Quiz';
 import Score from './components/Score';
