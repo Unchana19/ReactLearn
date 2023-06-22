@@ -12,7 +12,7 @@ function App() {
 
   let fromAmount, toAmount;
 
-  if(checkFromCurrency){
+  if (checkFromCurrency) {
     fromAmount = amount;
     toAmount = (amount * exchangeRate).toFixed(2);
   } else {
@@ -30,26 +30,31 @@ function App() {
       });
   }, [fromCurrency]);
 
-  const amountFromCurrency = (e) =>{
-    setAmount(e.target.value)
-    setCheckFromCurrency(true)
-  }
+  const amountFromCurrency = (e) => {
+    setAmount(e.target.value);
+    setCheckFromCurrency(true);
+  };
 
-  const amountToCurrency = (e) =>{
-    setAmount(e.target.value)
-    setCheckFromCurrency(false)
-  }
+  const amountToCurrency = (e) => {
+    setAmount(e.target.value);
+    setCheckFromCurrency(false);
+  };
 
   return (
     <main className="h-screen bg-teal-100 flex flex-col items-center justify-center text-teal-800">
-      <img className="mb-10 rounded-xl" src={money} alt="logo" width="30%" />
+      <img
+        className="mb-10 rounded-xl"
+        src={money}
+        alt="logo"
+        width="20%"
+      />
       <h1 className="mt-10 mb-20 text-4xl font-bold ">Currency Convert App</h1>
       <div className="my-5">
         <CurrencyComponent
           currencyChoice={currencyChoice}
           selectCurrency={fromCurrency}
           ChangeCurrency={(e) => setFromCurrency(e.target.value)}
-          amount = {fromAmount}
+          amount={fromAmount}
           onChangeAmount={amountFromCurrency}
         />
       </div>
@@ -59,7 +64,7 @@ function App() {
           currencyChoice={currencyChoice}
           selectCurrency={toCurrency}
           ChangeCurrency={(e) => setToCurrency(e.target.value)}
-          amount = {toAmount}
+          amount={toAmount}
           onChangeAmount={amountToCurrency}
         />
       </div>
