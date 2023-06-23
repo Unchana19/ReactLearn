@@ -1,0 +1,13 @@
+nav{
+  left: -100%;
+  transition: 1s;
+}
+
+nav.active{
+  left: 0;
+  transition: .5s;
+}
+
+div.active{
+  color: white;
+}
