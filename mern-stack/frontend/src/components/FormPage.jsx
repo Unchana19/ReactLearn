@@ -3,6 +3,7 @@ import {Button, useDisclosure} from "@nextui-org/react";
 import InputText from "./InputText";
 import ModalPopup from "./ModalPopup";
 import axios from "axios";
+import { getUser } from "../services/authorize";
 
 export default function FormPage() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -10,7 +11,7 @@ export default function FormPage() {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
+  const [author, setAuthor] = useState(getUser());
 
   const submitForm = (e) => {
     e.preventDefault();

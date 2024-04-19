@@ -5,18 +5,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ConfirmDelete from "./ConfirmDelete";
 import axios from "axios";
+import { getUser } from "../services/authorize";
 
 export default function BlogComponent({ blog, fetchData, deleteSuccess }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const deleteBlog = (onClose) => {
     axios.delete(`${import.meta.env.VITE_API}/blog/${blog.slug}`)
-    .then(response => {
-      deleteSuccess();
-      fetchData();
-    }).catch(err => {
-      alert(err);
-    });
+      .then(response => {
+        deleteSuccess();
+        fetchData();
+      }).catch(err => {
+        alert(err);
+      });
     onClose();
   }
 
@@ -30,14 +31,14 @@ export default function BlogComponent({ blog, fetchData, deleteSuccess }) {
             <p className="text-small text-default-500">{new Date(blog.createdAt).toLocaleString()}</p>
           </div>
         </Link>
-        <div className="flex gap-3">
-          <Button  isIconOnly size="sm" color="" variant="faded">
+        {getUser() && <div className="flex gap-3">
+          <Button isIconOnly size="sm" color="" variant="faded">
             <FontAwesomeIcon className="text-white" icon={faEdit} />
           </Button>
           <Button onPress={onOpen} isIconOnly size="sm" color="" variant="faded">
             <FontAwesomeIcon className="text-rose-900" icon={faTrash} />
           </Button>
-        </div>
+        </div>}
       </CardHeader>
       <Link to={`/blog/${blog.slug}`} >
         <Divider />

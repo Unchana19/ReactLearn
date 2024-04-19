@@ -1,23 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, useDisclosure } from "@nextui-org/react";
 import InputText from "./InputText";
 import ModalPopup from "./ModalPopup";
 import axios from "axios";
+import {authenticate, getUser} from "../services/authorize";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginComponent() {
+    const navigate = useNavigate();
+
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
     const [textPopup, setTextPopup] = useState("");
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
+    useEffect(() => {
+        getUser() && navigate("/");
+    }, []);
+
     const submitForm = (e) => {
         e.preventDefault();
         axios.post(`${import.meta.env.VITE_API}/login`, { username, password })
             .then((response) => {
-                console.log(response);
-                setTextPopup("เข้าสู่ระบบสำเร็จ");
-                onOpen()
+                authenticate(response, () => navigate("/create"));
             }).catch((err) => {
                 setTextPopup(err.response.data.error);
                 onOpen()

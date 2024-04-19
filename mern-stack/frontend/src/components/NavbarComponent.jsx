@@ -1,6 +1,9 @@
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
+import { getUser, logout } from "../services/authorize";
 
 export default function NavbarComponent() {
+  const navigate = useNavigate();
   const pathname = window.location.pathname;
 
   return (
@@ -14,20 +17,29 @@ export default function NavbarComponent() {
             Home
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link href="/create" color={pathname === "/create" ? "page" : "foreground"} aria-current={pathname === "/create" ? "page" : undefined}>
-            Create
-          </Link>
-        </NavbarItem>
+        {
+          getUser() && <NavbarItem>
+            <Link href="/create" color={pathname === "/create" ? "page" : "foreground"} aria-current={pathname === "/create" ? "page" : undefined}>
+              Create
+            </Link>
+          </NavbarItem>
+        }
       </NavbarContent>
+
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="/login">Login</Link>
+          {
+            !getUser() && <Link href="/login">Login</Link>
+          }
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="primary" href="/login" variant="flat">
-            Sign Up
-          </Button>
+          {
+            !getUser() ? <Button as={Link} color="primary" href="/login" variant="flat">
+              Sign Up
+            </Button> : <Button as={Link} color="primary" onPress={() => logout(() => navigate("/"))} variant="flat">
+              Log out
+            </Button>
+          }
         </NavbarItem>
       </NavbarContent>
     </Navbar>
