@@ -3,7 +3,7 @@ import {Button, useDisclosure} from "@nextui-org/react";
 import InputText from "./InputText";
 import ModalPopup from "./ModalPopup";
 import axios from "axios";
-import { getUser } from "../services/authorize";
+import { getUser, getToken } from "../services/authorize";
 
 export default function FormPage() {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
@@ -15,7 +15,12 @@ export default function FormPage() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API}/create`, {title, content, author})
+    axios.post(`${import.meta.env.VITE_API}/create`, {title, content, author},
+  {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  })
     .then(response => {
       setTextPopup("สร้างบทความสำเร็จ");
       onOpen()

@@ -5,13 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ConfirmDelete from "./ConfirmDelete";
 import axios from "axios";
-import { getUser } from "../services/authorize";
+import { getUser, getToken } from "../services/authorize";
 
 export default function BlogComponent({ blog, fetchData, deleteSuccess }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const deleteBlog = (onClose) => {
-    axios.delete(`${import.meta.env.VITE_API}/blog/${blog.slug}`)
+    axios.delete(`${import.meta.env.VITE_API}/blog/${blog.slug}`,
+  {
+    headers: {
+      Authorization: `Bearer ${getToken()}`
+    }
+  })
       .then(response => {
         deleteSuccess();
         fetchData();

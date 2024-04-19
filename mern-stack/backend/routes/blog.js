@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const {create, getAllBlogs, detailBlog, removeBlog} =  require("../controllers/blogController");
+const {requireLogin} = require("../controllers/authController");
 
-router.post("/create", create);
 router.get("/blogs", getAllBlogs);
 router.get("/blog/:slug", detailBlog);
-router.delete("/blog/:slug", removeBlog);
+
+router.post("/create", requireLogin, create);
+router.delete("/blog/:slug", requireLogin, removeBlog);
 
 module.exports = router;
