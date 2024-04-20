@@ -6,6 +6,7 @@ import NavbarComponent from "./components/NavbarComponent";
 import BlogDetail from "./components/BlogDetail";
 import LoginComponent from "./components/LoginComponent";
 import { getUser } from "./services/authorize";
+import EditComponent from "./components/EditComponent";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Route path="/create" element={getUser() ? <FormPage /> : <Navigate to="/login" replace />} ></Route>
             <Route path="/blog/:slug" element={<BlogDetail />}></Route>
             <Route path="/login" element={<LoginComponent />}></Route>
+            <Route path="/blog/edit/:slug" element={<EditComponent /> }></Route>
           </Routes>          
       </div>
     </BrowserRouter>

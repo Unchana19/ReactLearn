@@ -63,3 +63,16 @@ exports.removeBlog = (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   });
 }
+
+//update blog
+exports.update = (req, res) => {
+  const {slug} = req.params
+  // ส่งข้อมูล => title, content, author
+  const {title, content, author} = req.body;
+  Blogs.findOneAndUpdate({slug}, {title, content, author}, {new: true}).exec()
+  .then(blog => {
+    res.json(blog);
+  }).catch(err => {
+    res.status(500).json({error: "Internal Server Error"});
+  });
+}

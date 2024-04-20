@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Card, CardHeader, CardBody, CardFooter, Divider, Button, useDisclosure } from "@nextui-org/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +9,7 @@ import { getUser, getToken } from "../services/authorize";
 
 export default function BlogComponent({ blog, fetchData, deleteSuccess }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const navigate = useNavigate();
 
   const deleteBlog = (onClose) => {
     axios.delete(`${import.meta.env.VITE_API}/blog/${blog.slug}`,
@@ -37,7 +38,7 @@ export default function BlogComponent({ blog, fetchData, deleteSuccess }) {
           </div>
         </Link>
         {getUser() && <div className="flex gap-3">
-          <Button isIconOnly size="sm" color="" variant="faded">
+          <Button onPress={() => navigate(`/blog/edit/${blog.slug}`)} isIconOnly size="sm" color="" variant="faded">
             <FontAwesomeIcon className="text-white" icon={faEdit} />
           </Button>
           <Button onPress={onOpen} isIconOnly size="sm" color="" variant="faded">
